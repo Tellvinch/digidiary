@@ -1,0 +1,25 @@
+    <div class="container">
+      <h1>DIGITAL DIARY</h1>
+      <hr>
+    
+      <div class="row">
+        <div class="col-md-6">
+          <div *ngFor='let do of dos;let i = index'>
+            <div>
+              <h4 id={i} appHighlight highlightColor="yellow">{{do.name}} -- {{do.doneDate|date}}</h4>
+              <button (click)='toggleDetails(i)' class="btn btn-primary">More</button>
+            </div>
+    
+            <div *ngIf='do.showDescription'>
+              <app-do-detail  [do]='do' (isDone) = 'deleteDo($event,i)'></app-do-detail>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <app-diary-form  (addDiary)="addNewDiary($event)"></app-diary-form>
+        </div>
+      </div>
+    
+      
+  <p *ngIf='dos.length > 5'>Wow! You have alot to do today</p>
+</div>
